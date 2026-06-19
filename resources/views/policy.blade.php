@@ -198,7 +198,7 @@
 				</div>
 				<div class="pp-body">
 					<p class="pp-label">07 — Your rights</p>
-					<p class="pp-text">Under the NDPA 2023, you have the right to access, correct, delete, and port your personal data, object to certain uses, and withdraw consent at any time. To exercise any of these rights, contact us at <strong>privacy@pandacare.ng</strong>.</p>
+					<p class="pp-text">Under the NDPA 2023, you have the right to access, correct, delete, and port your personal data, object to certain uses, and withdraw consent at any time. To exercise any of these rights, contact us at <strong>support@pandacare.ng</strong>.</p>
 				</div>
 			</div>
 			
