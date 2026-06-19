@@ -223,16 +223,14 @@
                             <i class="fas fa-stethoscope me-1"></i>Services
                         </a>
                         <ul class="dropdown-menu">
-                            @php
-                                $services = App\Models\Service::where('is_active', true)->orderBy('order')->get();
-                            @endphp
-                            @foreach($services as $service)
+                            @forelse(Service::where('is_active', true)->orderBy('order')->get() as $service)
                                 <li>
                                     <a class="dropdown-item" href="{{ route('service.detail', $service->slug) }}">
                                         <i class="fas {{ $service->icon }} me-2"></i>{{ $service->name }}
                                     </a>
                                 </li>
-                            @endforeach
+                            @empty
+                            @endforelse
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -327,7 +325,7 @@
                     <p class="mb-0 text-white-50">&copy; {{ date('Y') }} PANDACARE MEDICARE LTD. All rights reserved.</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <a href="#" class="text-white-50 text-decoration-none me-3">Privacy Policy</a>
+                    <a href="{{ route('policy') }}" class="text-white-50 text-decoration-none me-3">Privacy Policy</a>
                     <a href="{{ route('terms') }}" class="text-white-50 text-decoration-none">Terms of Service</a>
                 </div>
             </div>

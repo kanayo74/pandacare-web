@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,7 +17,22 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(app_path('Models')));
+
+        foreach ($iterator as $file) {
+            if ($file->getExtension() !== 'php') {
+                continue;
+            }
+
+            // Build the fully qualified class name from the path
+            $relative = str_replace(app_path().'/', '', $file->getPathname());
+            $class = 'App\\'.str_replace(['/', '.php'], ['\\', ''], $relative);
+            $alias = $file->getBasename('.php');
+
+            if (class_exists($class)) {
+                class_alias($class, $alias);
+            }
+        }
     }
 
     /**
