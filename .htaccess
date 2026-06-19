@@ -1,0 +1,52 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+	RewriteEngine On
+	#RewriteBase /
+
+	ErrorDocument 400 %{REQUEST_SCHEME}
+	ErrorDocument 401 %{REQUEST_URI}
+	ErrorDocument 403 %{REQUEST_URI}
+	ErrorDocument 404 %{REQUEST_URI}
+	# ErrorDocument 404 %{REQUEST_FILENAME}
+    ErrorDocument 500 %{REQUEST_FILENAME}
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    RewriteRule ^(.*)$ public/$1 [L]
+    # Redirect Trailing Slashes If Not A Folder...
+    # RewriteCond %{REQUEST_FILENAME} !-d
+    # RewriteCond %{REQUEST_FILENAME} !-f
+    # RewriteCond %{REQUEST_URI} (.+)/$
+    # RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    # RewriteCond %{REQUEST_FILENAME} !-d
+    # RewriteCond %{REQUEST_FILENAME} !-f
+    # RewriteRule ^ public/index.php [QSA,L,NC]
+
+    # RewriteCond %{REQUEST_URI} (app|public|vendor|views)?/$
+	# RewriteRule ^.*$ - [R=404]
+
+	# RewriteCond %{REQUEST_URI} /messenger/.+?/(.+)?$
+	# RewriteCond %{REQUEST_FILENAME} !-d
+    # RewriteCond %{REQUEST_FILENAME} !-f
+	# RewriteCond %{REQUEST_URI} (.+)/$
+	# RewriteRule ^.*$ %1 [L,R=301]
+
+	# RewriteCond %{REQUEST_FILENAME} !-d
+    # RewriteCond %{REQUEST_URI} (.+)/$
+    # RewriteRule ^ %1 [R=404]
+
+    # RewriteCond %{REQUEST_FILENAME} !-d
+    # RewriteCond %{REQUEST_FILENAME} !-f
+    # RewriteRule ^.+$ index.php [QSA,L]
+</IfModule>
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# This domain inherits the “PHP” package.
+# php -- END cPanel-generated handler, do not edit
